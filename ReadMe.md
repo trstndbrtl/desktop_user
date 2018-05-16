@@ -13,19 +13,19 @@
 > Enjoy!
 
 ## What is happening?
-> When the module is installed, a new field is created (the Field_design field to set configurations ) and foor new tab also in the user profile.
+> When the module is installed, a new field is created (the Field_design field to set configurations ) and foor new tab in the user profile.
 
 ## How it works?
 > A class is created for each new page that is implemented in its controller via its service.
 
 ## More Fiendly use
 > When creating a user, just like during the update, a rewrite of the url is done.
- - /new-user 	        /user/5 	        French
- - /new-user/agenda 	/user/5/agenda 	  French
- - /new-user/agenda  	/user/5/agenda 	  Anglais
- - /new-user/flux 	  /user/5/flux 	    French
- - /new-user/flux 	  /user/5/flux 	    Anglais
- - /new-user/projets 	/user/5/projets   French
- - /new-user/projets 	/user/5/projets 	Anglais
- - /new-user/revue    /user/5/revue 	  French 	
- - /new-user/revue    /user/5/revue 	  Anglais
+ - /new-user -------------- /user/5 ---------- French
+ - /new-user/agenda ------- /user/5/agenda --- French
+ - /new-user/agenda ------- /user/5/agenda --- Anglais
+ - /new-user/flux --------- /user/5/flux ----- French
+ - /new-user/flux --------- /user/5/flux ----- Anglais
+ - /new-user/projets ------ /user/5/projets -- French
+ - /new-user/projets ------ /user/5/projets -- Anglais
+ - /new-user/revue -------- /user/5/revue ---- French
+ - /new-user/revue -------- /user/5/revue ---- Anglais
