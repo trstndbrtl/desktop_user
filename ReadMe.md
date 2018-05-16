@@ -20,7 +20,7 @@
 
 ## More Fiendly use
 > When creating a user, just like during the update, a rewrite of the url is done.
- - /new-user -------------- /user/5 ---------- French
+ - /new-user -------------- /user/5 ---------- French *generate by the system*
  - /new-user/agenda ------- /user/5/agenda --- French
  - /new-user/agenda ------- /user/5/agenda --- Anglais
  - /new-user/flux --------- /user/5/flux ----- French
