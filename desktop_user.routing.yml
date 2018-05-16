@@ -30,9 +30,3 @@ entity.user.revue:
   requirements:
     _custom_access: '\Drupal\desktop_user\Controller\RevueTabController::access'
     user: \d+
-desktop_user.hide_tab_block:
-  path: '/btn/hide-block'
-  defaults:
-    _controller: '\Drupal\desktop_user\Controller\FluxTabController::hideBlock'
-  requirements:
-    _permission: 'access content'

@@ -33,23 +33,10 @@ class UserPageTabRevue {
    * Returns the page
    */
   public function getRevue() {
-
-    $url = Url::fromRoute('desktop_user.hide_tab_block');
-    $link_options = array(
-      'attributes' => array(
-        'class' => array(
-          'use-ajax',
-          'my-second-class',
-        ),
-      ),
-    );
-    $url->setOptions($link_options);
-    $link = Link::fromTextAndUrl(t('Link title'), $url)->toString();
-
     $render['#theme'] = 'desktop_user_template';
-    $render['#data']['#markup'] = 'Revue stuff + ' . $link;
+    $render['#data']['#markup'] = 'Revue stuff';
     $render['#cache']['max-age'] = 0;
-
     return $render;
   }
+  
 }

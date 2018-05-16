@@ -25,7 +25,7 @@ class AgendaTabController extends ControllerBase {
   protected $agenda;
 
   /**
-  * HelloWorldController constructor.
+  * AgendaTabController constructor.
   *
   * @param \Drupal\desktop_user\UserPageTabAgenda $agenda
   */

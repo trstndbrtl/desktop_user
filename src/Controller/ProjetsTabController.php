@@ -25,7 +25,7 @@ class ProjetsTabController extends ControllerBase {
   protected $projets;
 
   /**
-  * HelloWorldController constructor.
+  * ProjetsTabController constructor.
   *
   * @param \Drupal\desktop_user\UserPageTabProjets $data
   */

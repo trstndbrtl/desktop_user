@@ -25,7 +25,7 @@ class RevueTabController extends ControllerBase {
   protected $revue;
 
   /**
-  * HelloWorldController constructor.
+  * RevueTabController constructor.
   *
   * @param \Drupal\desktop_user\UserPageTabRevue $data
   */

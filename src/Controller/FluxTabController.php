@@ -25,7 +25,7 @@ class FluxTabController extends ControllerBase {
   protected $flux;
 
   /**
-   * HelloWorldController constructor.
+   * FluxTabController constructor.
    *
    * @param \Drupal\desktop_user\UserPageTabFlux $flux
    */
@@ -42,27 +42,8 @@ class FluxTabController extends ControllerBase {
     );
   }
 
-    /**
-   * Route callback for hiding the Salutation block.
-   * Only works for Ajax calls.
-   *
-   * @param \Symfony\Component\HttpFoundation\Request $request
-   *
-   * @return \Drupal\Core\Ajax\AjaxResponse
-   */
-  public function hideBlock(Request $request) {
-    if (!$request->isXmlHttpRequest()) {
-      throw new NotFoundHttpException();
-    }
-
-    $response = new AjaxResponse();
-    $command = new RemoveCommand('.mb-3.navbar');
-    $response->addCommand($command);
-    return $response;
-  }
-
   /**
-   * userAgendaPage.
+   * userFluxPage.
    *
    * @return string
    *   Return Hello string.

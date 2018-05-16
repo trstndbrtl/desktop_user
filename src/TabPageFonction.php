@@ -27,7 +27,6 @@ trait TabPageFonction {
    *   Return owner Id of the current page string.
    */
   public static function getOwnerCurrentPage() {
-
     // Set the variable
     $owner = 0;
     // resquest with route if is a page user
