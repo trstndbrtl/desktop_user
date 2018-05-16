@@ -1,0 +1,13 @@
+services:
+  desktop_user.tab_flux:
+    class: Drupal\desktop_user\UserPageTabFlux
+    arguments: ['@config.factory']
+  desktop_user.tab_projets:
+    class: Drupal\desktop_user\UserPageTabProjets
+    arguments: ['@config.factory']
+  desktop_user.tab_agenda:
+    class: Drupal\desktop_user\UserPageTabAgenda
+    arguments: ['@config.factory']
+  desktop_user.tab_revue:
+    class: Drupal\desktop_user\UserPageTabRevue
+    arguments: ['@config.factory']

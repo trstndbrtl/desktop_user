@@ -1,0 +1,5 @@
+name: 'Desktop User'
+type: module
+description: 'Desktop informations user'
+core: 8.x
+package: 'MM'

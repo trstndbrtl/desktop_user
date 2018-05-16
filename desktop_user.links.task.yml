@@ -1,0 +1,16 @@
+entity.user.flux:
+  title: Flux
+  route_name: entity.user.flux
+  base_route: entity.user.canonical
+entity.user.projets:
+  title: Projets
+  route_name: entity.user.projets
+  base_route: entity.user.canonical
+entity.user.agenda:
+  title: Agenda
+  route_name: entity.user.agenda
+  base_route: entity.user.canonical
+entity.user.revue:
+  title: Revue
+  route_name: entity.user.revue
+  base_route: entity.user.canonical

@@ -1,0 +1,26 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_design
+  module:
+    - desktop_user
+    - user
+id: user.user.field_design
+field_name: field_design
+entity_type: user
+bundle: user
+label: design
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  tab_flux: 0
+  tab_projets: 0
+  tab_agenda: 0
+  tab_revue: 0
+  tab_banner: 0
+  tab_links: 0
+field_type: design_user

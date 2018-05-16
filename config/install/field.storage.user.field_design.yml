@@ -1,0 +1,18 @@
+langcode: fr
+status: true
+dependencies:
+  module:
+    - desktop_user
+    - user
+id: user.field_design
+field_name: field_design
+entity_type: user
+type: design_user
+settings: {  }
+module: desktop_user
+locked: false
+cardinality: 1
+translatable: false
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,38 @@
+entity.user.flux:
+  path: '/user/{user}/flux'
+  defaults:
+    _title: 'Flux'
+    _controller: '\Drupal\desktop_user\Controller\FluxTabController::userFluxPage'
+  requirements:
+    _custom_access: '\Drupal\desktop_user\Controller\FluxTabController::access'
+    user: \d+
+entity.user.projets:
+  path: '/user/{user}/projets'
+  defaults:
+    _title: 'Projets'
+    _controller: '\Drupal\desktop_user\Controller\ProjetsTabController::userProjetsPage'
+  requirements:
+    _custom_access: '\Drupal\desktop_user\Controller\ProjetsTabController::access'
+    user: \d+
+entity.user.agenda:
+  path: '/user/{user}/agenda'
+  defaults:
+    _title: 'Agenda'
+    _controller: '\Drupal\desktop_user\Controller\AgendaTabController::userAgendaPage'
+  requirements:
+    _custom_access: '\Drupal\desktop_user\Controller\AgendaTabController::access'
+    user: \d+
+entity.user.revue:
+  path: '/user/{user}/revue'
+  defaults:
+    _title: 'Revue'
+    _controller: '\Drupal\desktop_user\Controller\RevueTabController::userRevuePage'
+  requirements:
+    _custom_access: '\Drupal\desktop_user\Controller\RevueTabController::access'
+    user: \d+
+desktop_user.hide_tab_block:
+  path: '/btn/hide-block'
+  defaults:
+    _controller: '\Drupal\desktop_user\Controller\FluxTabController::hideBlock'
+  requirements:
+    _permission: 'access content'

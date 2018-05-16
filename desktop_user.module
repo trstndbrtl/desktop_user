@@ -1,0 +1,183 @@
+<?php
+
+/**
+ * @file
+ * Contains desktop_user.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements hook_help().
+ * 
+ * Give some information on module
+ */
+function desktop_user_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the desktop_user module.
+    case 'help.page.desktop_user':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<strong>' . t('This module add some Tab to user profile with some configuration') . '</strong><br>';
+      $output .= t('For each user profile, tabs can be added for various purposes.') . '<br>';
+      $output .= t('For our use, feeds, projects, agenda and tab review are added.') . '<br>';
+      $output .= t('From the profile editing page, the user can configure the visibility of pages/tabs. Off, Only Me, Public and Only Fiends.') . '<br>';
+      $output .= t('The visibility Only firend must be implemented in the next episode.') . '<br>';
+      $output .= t('Enjoy!') . '</p>';
+      return $output;
+    default:
+  }
+}
+
+/**
+ * Implements hook_uninstall()
+ * 
+ * Remove any configuration that the module sets.
+ *
+ */
+function desktop_user_uninstall() {
+  // Remove configuration field_design to user profile
+  \Drupal::configFactory()->getEditable('field.field.user.user.field_design')->delete();
+  \Drupal::configFactory()->getEditable('field.storage.user.user.field_design')->delete();
+}
+
+/**
+ * Implements hook_menu_local_tasks_alter()
+ * 
+ * Change label for user tab
+ *
+ * @param $data
+ * @param $route_name
+ */
+function desktop_user_menu_local_tasks_alter(&$data, $route_name) {
+  // Get if is Tab context 
+  if ($data['tabs'] && $data['tabs'][0]) {
+    // get if in the Tab context user profile (entity.user.canonical) match
+    if (in_array('entity.user.canonical', $data['tabs'][0])) {
+      // If math overide label profil tab
+      $data['tabs'][0]['entity.user.canonical']['#link']['title'] = t('Profile');
+    }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert()
+ * 
+ * Create pretty url alias for new user tab
+ *
+ * @param EntityInterface $entity
+ */
+function desktop_user_user_insert(EntityInterface $entity) {
+  // Save the entity to insert to run path generate 
+  // --> desktop_user_user_update(EntityInterface $entity)
+  $entity->save();
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update()
+ * 
+ * Update pretty url alias for new user tab
+ *
+ * @param EntityInterface $entity
+ */
+function desktop_user_user_update(EntityInterface $entity) {
+  // Only if new with and Id
+  if (!$entity->isNew()) {
+    // Check if username have change
+    $clean_username = \Drupal::service('pathauto.alias_cleaner')->cleanString($entity->getUsername());
+    if ($entity->original) {
+      $clean_username_original = \Drupal::service('pathauto.alias_cleaner')->cleanString($entity->original->getUsername());
+    }
+    // Get all Languages
+    $all_language = \Drupal::languageManager()->getLanguages();
+    // Prepare List all title page tab
+    $page = ['flux', 'projets', 'agenda', 'revue'];
+    // Run the process with languagues
+    foreach ($all_language as $key) {
+      // get the key languague
+      $langcode = $key->getId();
+      // Run process for all page
+      foreach ($page as $p) {
+        // prepare the source path string variable
+        $source_update = '/user/'.$entity->id().'/'.$p;
+        // Delete old path alias before generete new alias 
+        if ($entity->original) {
+          // Prepare old path string variable
+          $alias_update = '/'.$clean_username_original.'/'.$p;
+          // Delete old path alias if exist
+          if (\Drupal::service('path.alias_storage')->aliasExists($alias_update, $langcode)) {
+            \Drupal::service('path.alias_storage')->delete(array('source' => $source_update, 'alias' => $alias_update, 'langcode' => $langcode));
+          }
+        }
+        // Prepare new path alias string variable
+        $alias_update = '/'.$clean_username.'/'.$p;
+        // Set it!
+        \Drupal::service('path.alias_storage')->save($source_update, $alias_update , $langcode);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete()
+ * 
+ * Delete pretty url alias for new user tab
+ *
+ * @param EntityInterface $entity
+ */
+function desktop_user_user_delete(EntityInterface $entity) {
+  // get username for deleted user
+  $clean_username = \Drupal::service('pathauto.alias_cleaner')->cleanString($entity->getUsername());
+  // Get all language
+  $all_language = \Drupal::languageManager()->getLanguages();
+  // prepare List all title page
+  $page = ['flux', 'projets', 'agenda', 'revue'];
+  // Run process for all language
+  foreach ($all_language as $key) {
+    // Run process for all page
+    foreach ($page as $p) {
+      // Delete de path
+      \Drupal::service('path.alias_storage')->delete(array('source' => '/user/'.$entity->id().'/'.$p, 'alias' => '/'.$clean_username.'/'.$p, 'langcode' => $key->getId()));
+    }
+  }
+}
+
+/**
+ * Implements hook_page_attachments()
+ * 
+ * Add ajax features for anonymous user
+ *
+ * @param $attachments
+ */
+function desktop_user_page_attachments(array &$attachments) {
+  if (\Drupal::currentUser()->isAnonymous()) {
+    $attachments['#attached']['library'][] = 'desktop_user/anonymousajax';
+  }
+}
+
+/**
+ * Implements hook_theme().
+ * 
+ * @param $existing
+ * @param $type
+ * @param $theme
+ * @param $path
+ */
+function desktop_user_theme($existing, $type, $theme, $path) {
+  return [
+    // 'desktop_user' => [
+    //   'variables' => [
+    //     'flux' => 0,
+    //     'projets' => 0,
+    //     'agenda' => 0,
+    //     'revue' => 0,
+    //     'banner' => 0,
+    //     'links' => 0
+    //   ],
+    // ],
+    'desktop_user_template' => [
+      'variables' => ['data' => NULL,],
+    ],
+  ];
+}

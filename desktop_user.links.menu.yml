@@ -1,0 +1,16 @@
+entity.user.flux:
+  title: Flux
+  parent: entity.user.canonical
+  route_name: entity.user.flux
+entity.user.projets:
+  title: Projets
+  parent: entity.user.canonical
+  route_name: entity.user.projets
+entity.user.agenda:
+  title: Agenda
+  parent: entity.user.canonical
+  route_name: entity.user.agenda
+entity.user.revue:
+  title: revue
+  parent: entity.user.canonical
+  route_name: entity.user.revue
