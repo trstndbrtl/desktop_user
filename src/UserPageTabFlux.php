@@ -5,8 +5,6 @@ namespace Drupal\desktop_user;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\Core\Url;
-use Drupal\Core\Link;
 
 /**
  * Prepares all pages.
@@ -38,5 +36,5 @@ class UserPageTabFlux {
     $render['#cache']['max-age'] = 0;
     return $render;
   }
-  
+
 }
